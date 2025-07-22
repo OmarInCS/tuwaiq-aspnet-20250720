@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore", "EFCore\EFCore.csproj", "{A157FAA5-EB71-4B9F-970D-B2388D201394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore", "EFCore\EFCore.csproj", "{A157FAA5-EB71-4B9F-970D-B2388D201394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoPages", "DemoPages\DemoPages.csproj", "{1E193E27-0DB8-4870-B9B7-86403B165EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicDM", "ClinicDM\ClinicDM.csproj", "{3ED79961-6BB3-4CA2-A205-1B5A661A1B80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A157FAA5-EB71-4B9F-970D-B2388D201394}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A157FAA5-EB71-4B9F-970D-B2388D201394}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A157FAA5-EB71-4B9F-970D-B2388D201394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E193E27-0DB8-4870-B9B7-86403B165EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E193E27-0DB8-4870-B9B7-86403B165EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E193E27-0DB8-4870-B9B7-86403B165EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E193E27-0DB8-4870-B9B7-86403B165EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED79961-6BB3-4CA2-A205-1B5A661A1B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED79961-6BB3-4CA2-A205-1B5A661A1B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED79961-6BB3-4CA2-A205-1B5A661A1B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED79961-6BB3-4CA2-A205-1B5A661A1B80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
