@@ -22,6 +22,14 @@ namespace EFCore.ClinicModels {
                 .Property(d => d.Salary)
                 .HasDefaultValue(10000.0);
 
+            modelBuilder.Entity<Speciality>()
+                .HasData(
+                    new Speciality { Id = 1, Name = "Cardiology" },
+                    new Speciality { Id = 2, Name = "Neurology" },
+                    new Speciality { Id = 3, Name = "Pediatrics" }
+                );
+
+
             //modelBuilder.Entity<Doctor>()
             //    .HasOne(d => d.Speciality)
             //    .WithMany(s => s.Doctors)
