@@ -1,4 +1,5 @@
 ﻿using ClinicDM.Models;
+using ClinicDM.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicDM.Controllers {
@@ -6,7 +7,15 @@ namespace ClinicDM.Controllers {
 
 
         public IActionResult Index() {
-            return View(Constants.Patients);
+            var patients = Constants.Patients.Select(p => new PatientVM {
+                Id = p.Id,
+                FullName = p.FullName,
+                DateOfBirth = p.DateOfBirth,
+                Email = p.Email,
+                NationalId = p.NationalId,
+                PhoneNumber = p.PhoneNumber
+            }).ToList();
+            return View(patients);
         }
 
         public IActionResult Details(int id) {
@@ -18,9 +27,21 @@ namespace ClinicDM.Controllers {
             return View(patient);
         }
 
+
         public IActionResult Create() {
             var patient = new Patient();
             return View(patient);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Patient newP) {
+
+            if(!ModelState.IsValid) {
+                return View(newP);
+            }
+
+            Constants.Patients.Add(newP);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

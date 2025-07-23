@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace ClinicDM.Models {
-    public class Patient {
+namespace ClinicDM.ViewModels {
+    public class PatientVM {
         public int Id { get; set; }
 
         public string FullName { get; set; }
@@ -11,10 +11,10 @@ namespace ClinicDM.Models {
 
         public string Email { get; set; }
 
-        [RegularExpression("05\\d{8}", ErrorMessage = "Phone number must be in format 05xxxxxxxx")]
         public string PhoneNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 
+        public int Age => Convert.ToInt32((DateTime.Today - DateOfBirth).TotalDays / 365);
     }
 }
