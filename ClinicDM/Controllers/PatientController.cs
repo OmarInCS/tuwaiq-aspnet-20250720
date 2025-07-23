@@ -17,5 +17,10 @@ namespace ClinicDM.Controllers {
             }
             return View(patient);
         }
+
+        public IActionResult Create() {
+            var patient = new Patient();
+            return View(patient);
+        }
     }
 }
