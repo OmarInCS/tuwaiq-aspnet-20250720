@@ -65,5 +65,15 @@ namespace ClinicDM.Controllers {
             updatedPatient.ToPatient(existingPatient);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Delete(int id) {
+            var patient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+            if (patient == null) {
+                return NotFound();
+            }
+
+            Constants.Patients.Remove(patient);
+            return Ok();
+        }
     }
 }
