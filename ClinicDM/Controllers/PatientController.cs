@@ -7,14 +7,7 @@ namespace ClinicDM.Controllers {
 
 
         public IActionResult Index() {
-            var patients = Constants.Patients.Select(p => new PatientVM {
-                Id = p.Id,
-                FullName = p.FullName,
-                DateOfBirth = p.DateOfBirth,
-                Email = p.Email,
-                NationalId = p.NationalId,
-                PhoneNumber = p.PhoneNumber
-            }).ToList();
+            var patients = Constants.Patients.Select(p => p.ToPatientVM()).ToList();
             return View(patients);
         }
 
@@ -24,23 +17,52 @@ namespace ClinicDM.Controllers {
             if (patient == null) {
                 return NotFound();
             }
-            return View(patient);
+
+            var vm = patient.ToPatientVM();
+            return View(vm);
         }
 
 
         public IActionResult Create() {
-            var patient = new Patient();
-            return View(patient);
+            var vm = new PatientCreateVM();
+            return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Create(Patient newP) {
+        public IActionResult Create(PatientCreateVM newPatient) {
 
             if(!ModelState.IsValid) {
-                return View(newP);
+                return View(newPatient);
             }
 
-            Constants.Patients.Add(newP);
+            var patient = newPatient.ToPatient();
+            Constants.Patients.Add(patient);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int id) {
+            var patient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+            if (patient == null) {
+                return NotFound();
+            }
+            
+            var vm = patient.ToPatientUpdateVM();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, PatientUpdateVM updatedPatient) {
+
+            if (!ModelState.IsValid) {
+                return View(updatedPatient);
+            }
+
+            var existingPatient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+            if (existingPatient == null) {
+                return NotFound();
+            }
+
+            updatedPatient.ToPatient(existingPatient);
             return RedirectToAction(nameof(Index));
         }
     }

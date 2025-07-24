@@ -3,7 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
 namespace ClinicDM.ViewModels {
-    public class PatientCreateVM {
+    public class PatientUpdateVM {
+
+        public int Id { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
@@ -21,15 +23,12 @@ namespace ClinicDM.ViewModels {
         public DateTime DateOfBirth { get; set; } = DateTime.Now.AddYears(-20);
 
 
-        public Patient ToPatient() {
-            return new Patient {
-                Id = Constants.Patients.Count + 1,
-                FullName = FullName,
-                NationalId = NationalId,
-                Email = Email,
-                PhoneNumber = PhoneNumber,
-                DateOfBirth = DateOfBirth
-            };
+        public void ToPatient(Patient patient) {
+            patient.FullName = FullName;
+            patient.NationalId = NationalId;
+            patient.Email = Email;
+            patient.PhoneNumber = PhoneNumber;
+            patient.DateOfBirth = DateOfBirth;
         }
     }
 }

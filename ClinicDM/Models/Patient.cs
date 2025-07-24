@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ClinicDM.ViewModels;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
 namespace ClinicDM.Models {
@@ -15,6 +16,30 @@ namespace ClinicDM.Models {
         public string PhoneNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+
+        public PatientVM ToPatientVM() {
+            return new PatientVM {
+                Id = Id,
+                FullName = FullName,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                NationalId = NationalId,
+                PhoneNumber = PhoneNumber
+            };
+        }
+
+        public PatientUpdateVM ToPatientUpdateVM() {
+            return new PatientUpdateVM {
+                Id = Id,
+                FullName = FullName,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                NationalId = NationalId,
+                PhoneNumber = PhoneNumber
+            };
+        }
+
 
     }
 }
