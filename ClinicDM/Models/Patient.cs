@@ -10,6 +10,9 @@ namespace ClinicDM.Models {
 
         public string NationalId { get; set; }
 
+        [MaxLength(50)]
+        public string Gender { get; set; }
+
         public string Email { get; set; }
 
         [RegularExpression("05\\d{8}", ErrorMessage = "Phone number must be in format 05xxxxxxxx")]
@@ -22,6 +25,7 @@ namespace ClinicDM.Models {
             return new PatientVM {
                 Id = Id,
                 FullName = FullName,
+                Gender = Gender,
                 DateOfBirth = DateOfBirth,
                 Email = Email,
                 NationalId = NationalId,
@@ -33,6 +37,7 @@ namespace ClinicDM.Models {
             return new PatientUpdateVM {
                 Id = Id,
                 FullName = FullName,
+                Gender = Gender,
                 DateOfBirth = DateOfBirth,
                 Email = Email,
                 NationalId = NationalId,

@@ -10,6 +10,15 @@
         <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
     <div>
+        <label asp-for="Gender"></label>
+        <select class="form-select" asp-for="Gender" asp-items="new SelectList(Enum.GetNames<Genders>())">
+            @* @foreach (var g in Enum.GetNames(typeof(Genders))) {
+                <option>@g</option>
+            } *@
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div>
         <label asp-for="NationalId"></label>
         <input asp-for="NationalId" class="form-control" />
         <span asp-validation-for="NationalId" class="text-danger"></span>

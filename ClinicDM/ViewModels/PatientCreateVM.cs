@@ -8,6 +8,8 @@ namespace ClinicDM.ViewModels {
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
+        public string Gender { get; set; }
+
         [Display(Name = "National Id")]
         public string NationalId { get; set; }
 
@@ -24,6 +26,7 @@ namespace ClinicDM.ViewModels {
         public Patient ToPatient() {
             return new Patient {
                 FullName = FullName,
+                Gender = Gender,
                 NationalId = NationalId,
                 Email = Email,
                 PhoneNumber = PhoneNumber,

@@ -26,6 +26,11 @@ namespace ClinicDM.Controllers {
                 Data = patients,
                 Filter = filter
             };
+
+            //ViewData["CreatedBy"] = "Omar Abdelkerim";
+            //ViewBag.CreatedBy = "Omar Abdelkerim";
+
+
             return View(vm);
         }
 

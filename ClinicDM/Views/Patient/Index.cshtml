@@ -1,5 +1,9 @@
 ﻿@model PatientFilteredListVM
 
+@{
+    ViewData["Title"] = "Patients";
+}
+
 <h4 class="card-title">
     Patients
 </h4>
@@ -11,32 +15,20 @@
         New Patient
     </a>
 </div>
+<p>
+    @ViewData["CreatedBy"]
+    <br />
+    @ViewBag.CreatedBy
+</p>
 
-<div class="">
-    <form class="row row-cols-lg-auto g-3 align-items-center">
-        <div class="col-12">
-            <input class="form-control" type="text" asp-for="Filter.Id" placeholder="Filter by Id" aria-label="Filter by Id">
-        </div>
-        <div class="col-12">
-            <input class="form-control" asp-for="Filter.FullName" placeholder="Filter by Full Name" aria-label="Filter by Full Name">
-        </div>
-        <div class="col-12">
-            <input class="form-control" asp-for="Filter.PhoneNumber" placeholder="Filter by Phone Number" aria-label="Filter by Phone Number">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-outline-secondary">Search</button>
-        </div>
-    </form>
-    <p>
-        Current Filter: @Model.Filter.FullName
-    </p>
-</div>
+<partial name="_Filter" model="@Model.Filter" />
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">FullName</th>
+            <th scope="col">Gender</th>
             <th scope="col">National Id</th>
             <th scope="col">Email</th>
             <th scope="col">Phone Number</th>
@@ -50,6 +42,7 @@
             <tr>
                 <td>@p.Id</td>
                 <td>@p.FullName</td>
+                <td>@p.Gender</td>
                 <td>@p.NationalId</td>
                 <td>@p.Email</td>
                 <td>@p.PhoneNumber</td>
