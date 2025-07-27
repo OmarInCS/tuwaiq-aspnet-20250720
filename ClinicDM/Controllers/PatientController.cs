@@ -1,19 +1,26 @@
 ﻿using ClinicDM.Models;
 using ClinicDM.ViewModels;
+using EFCore.ClinicModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicDM.Controllers {
     public class PatientController : Controller {
 
+        public ClinicContext context;
+
+        public PatientController(ClinicContext context) {
+            this.context = context;
+        }
+
 
         public IActionResult Index() {
-            var patients = Constants.Patients.Select(p => p.ToPatientVM()).ToList();
+            var patients = context.Patients.Select(p => p.ToPatientVM()).ToList();
             return View(patients);
         }
 
         public IActionResult Details(int id) {
 
-           var patient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+           var patient = context.Patients.FirstOrDefault(p => p.Id == id);
             if (patient == null) {
                 return NotFound();
             }
@@ -36,12 +43,13 @@ namespace ClinicDM.Controllers {
             }
 
             var patient = newPatient.ToPatient();
-            Constants.Patients.Add(patient);
+            context.Patients.Add(patient);
+            context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Update(int id) {
-            var patient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+            var patient = context.Patients.FirstOrDefault(p => p.Id == id);
             if (patient == null) {
                 return NotFound();
             }
@@ -57,22 +65,24 @@ namespace ClinicDM.Controllers {
                 return View(updatedPatient);
             }
 
-            var existingPatient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+            var existingPatient = context.Patients.FirstOrDefault(p => p.Id == id);
             if (existingPatient == null) {
                 return NotFound();
             }
 
             updatedPatient.ToPatient(existingPatient);
+            context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id) {
-            var patient = Constants.Patients.FirstOrDefault(p => p.Id == id);
+            var patient = context.Patients.FirstOrDefault(p => p.Id == id);
             if (patient == null) {
                 return NotFound();
             }
 
-            Constants.Patients.Remove(patient);
+            context.Patients.Remove(patient);
+            context.SaveChanges();
             return Ok();
         }
     }

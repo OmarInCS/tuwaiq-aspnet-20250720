@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ClinicDM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4f97dd71305a34e4ff35e7c8dd6433511a09003")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4c6cd42af4ceb83fa490acf5e670c2bb96814c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("ClinicDM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ClinicDM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

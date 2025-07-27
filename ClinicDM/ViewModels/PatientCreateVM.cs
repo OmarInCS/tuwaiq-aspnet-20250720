@@ -23,7 +23,6 @@ namespace ClinicDM.ViewModels {
 
         public Patient ToPatient() {
             return new Patient {
-                Id = Constants.Patients.Count + 1,
                 FullName = FullName,
                 NationalId = NationalId,
                 Email = Email,
