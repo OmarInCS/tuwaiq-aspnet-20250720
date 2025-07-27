@@ -1,15 +1,35 @@
-﻿@model List<PatientVM>
+﻿@model PatientFilteredListVM
 
 <h4 class="card-title">
     Patients
 </h4>
 <div class="d-flex justify-content-between">
     <h6 class="card-subtitle">
-        # Patients @Model.Count
+        # Patients @Model.Data.Count
     </h6>
     <a asp-controller="Patient" asp-action="Create" class="btn btn-primary">
         New Patient
     </a>
+</div>
+
+<div class="">
+    <form class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+            <input class="form-control" type="text" asp-for="Filter.Id" placeholder="Filter by Id" aria-label="Filter by Id">
+        </div>
+        <div class="col-12">
+            <input class="form-control" asp-for="Filter.FullName" placeholder="Filter by Full Name" aria-label="Filter by Full Name">
+        </div>
+        <div class="col-12">
+            <input class="form-control" asp-for="Filter.PhoneNumber" placeholder="Filter by Phone Number" aria-label="Filter by Phone Number">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-outline-secondary">Search</button>
+        </div>
+    </form>
+    <p>
+        Current Filter: @Model.Filter.FullName
+    </p>
 </div>
 
 <table class="table table-striped">
@@ -26,7 +46,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var p in Model) {
+        @foreach (var p in Model.Data) {
             <tr>
                 <td>@p.Id</td>
                 <td>@p.FullName</td>

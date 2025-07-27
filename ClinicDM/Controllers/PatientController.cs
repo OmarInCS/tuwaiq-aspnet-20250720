@@ -13,9 +13,20 @@ namespace ClinicDM.Controllers {
         }
 
 
-        public IActionResult Index() {
-            var patients = context.Patients.Select(p => p.ToPatientVM()).ToList();
-            return View(patients);
+        public IActionResult Index(PatientFilterVM filter) {
+
+            var patients = context.Patients
+                                    .Where(p => filter.Id == null || p.Id == filter.Id)
+                                    .Where(p => filter.FullName == null || p.FullName.Contains(filter.FullName))
+                                    .Where(p => filter.PhoneNumber == null || p.PhoneNumber.StartsWith(filter.PhoneNumber))
+                                    .Select(p => p.ToPatientVM())
+                                    .ToList();
+
+            var vm = new PatientFilteredListVM {
+                Data = patients,
+                Filter = filter
+            };
+            return View(vm);
         }
 
         public IActionResult Details(int id) {
@@ -36,6 +47,7 @@ namespace ClinicDM.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(PatientCreateVM newPatient) {
 
             if(!ModelState.IsValid) {
@@ -59,6 +71,7 @@ namespace ClinicDM.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Update(int id, PatientUpdateVM updatedPatient) {
 
             if (!ModelState.IsValid) {
