@@ -32,7 +32,8 @@ namespace ClinicDM.Models {
                 DateOfBirth = DateOfBirth,
                 Email = Email,
                 NationalId = NationalId,
-                PhoneNumber = PhoneNumber
+                PhoneNumber = PhoneNumber,
+                Appointments = Appointments.Select(a => a.ToAppointmentVM()).ToList(),
             };
         }
 

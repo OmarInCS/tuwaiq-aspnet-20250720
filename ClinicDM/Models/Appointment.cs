@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ClinicDM.ViewModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClinicDM.Models {
     public class Appointment {
@@ -19,5 +20,17 @@ namespace ClinicDM.Models {
 
         public Patient Patient { get; set; } = null!;
         public Doctor Doctor { get; set; } = null!;
+
+
+        public AppointmentVM ToAppointmentVM() {
+            return new AppointmentVM {
+                Id = Id,
+                AppointmentDate = AppointmentDate,
+                DoctorId = DoctorId,
+                PatientId = PatientId,
+                RawStatus = Status,
+                DoctorName = Doctor.Name,
+            };
+        }
     }
 }
