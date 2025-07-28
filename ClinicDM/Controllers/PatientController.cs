@@ -1,4 +1,5 @@
 ﻿using ClinicDM.Models;
+using ClinicDM.Services;
 using ClinicDM.ViewModels;
 using EFCore.ClinicModels;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +8,13 @@ namespace ClinicDM.Controllers {
     public class PatientController : Controller {
 
         public ClinicContext context;
+        public PatientService patientService;
+        public AnotherService anotherService;
 
-        public PatientController(ClinicContext context) {
+        public PatientController(ClinicContext context, PatientService patientService, AnotherService anotherService) {
             this.context = context;
+            this.patientService = patientService;
+            this.anotherService = anotherService;
         }
 
 

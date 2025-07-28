@@ -1,3 +1,4 @@
+using ClinicDM.Services;
 using EFCore.ClinicModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ClinicContext>(options => options.UseSqlServer(connString));
+
+// Dependency Injection
+builder.Services.AddTransient<PatientService>();
+builder.Services.AddTransient<AnotherService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
