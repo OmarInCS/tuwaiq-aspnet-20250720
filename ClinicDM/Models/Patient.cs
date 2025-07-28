@@ -21,6 +21,9 @@ namespace ClinicDM.Models {
         public DateTime DateOfBirth { get; set; }
 
 
+        public List<Appointment> Appointments { get; set; } = new();
+
+
         public PatientVM ToPatientVM() {
             return new PatientVM {
                 Id = Id,

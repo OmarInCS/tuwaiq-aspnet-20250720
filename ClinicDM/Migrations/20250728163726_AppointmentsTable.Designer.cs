@@ -4,6 +4,7 @@ using EFCore.ClinicModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicDM.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    partial class ClinicContextModelSnapshot : ModelSnapshot
+    [Migration("20250728163726_AppointmentsTable")]
+    partial class AppointmentsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,35 +59,6 @@ namespace ClinicDM.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AppointmentDate = new DateTime(2025, 8, 1, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            PatientId = 1,
-                            Status = "Scheduled"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AppointmentDate = new DateTime(2025, 7, 25, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            PatientId = 1,
-                            Status = "Completed"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AppointmentDate = new DateTime(2025, 8, 5, 17, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            PatientId = 1,
-                            Status = "Scheduled"
-                        });
                 });
 
             modelBuilder.Entity("ClinicDM.Models.Doctor", b =>
@@ -102,13 +76,6 @@ namespace ClinicDM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Wael Osama"
-                        });
                 });
 
             modelBuilder.Entity("ClinicDM.Models.Patient", b =>
