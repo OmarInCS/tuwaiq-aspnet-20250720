@@ -2,10 +2,13 @@
 using ClinicDM.Services;
 using ClinicDM.ViewModels;
 using EFCore.ClinicModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClinicDM.Controllers {
+
+    [Authorize]
     public class PatientController : Controller {
 
         public ClinicContext context;

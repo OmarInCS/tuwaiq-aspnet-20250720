@@ -1,3 +1,4 @@
+using ClinicDM.Helpers;
 using ClinicDM.Services;
 using EFCore.ClinicModels;
 using Microsoft.AspNetCore.Identity;
@@ -40,10 +41,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+await AdminSeeder.CreateAdminUser(app);
 
 app.Run();
