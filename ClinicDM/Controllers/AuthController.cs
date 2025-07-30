@@ -1,4 +1,5 @@
-﻿using ClinicDM.ViewModels;
+﻿using ClinicDM.Models;
+using ClinicDM.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace ClinicDM.Controllers {
     public class AuthController : Controller {
 
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<AppUser> userManager;
+        private readonly SignInManager<AppUser> signInManager;
 
-        public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) {
+        public AuthController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
@@ -66,10 +67,30 @@ namespace ClinicDM.Controllers {
                 return View(model);
             }
 
-            var user = new IdentityUser {
+            var user = new AppUser {
                 UserName = model.Email,
                 Email = model.Email
             };
+
+            if (model.ProfilePicture != null && model.ProfilePicture.Length > 0) {
+
+                if (model.ProfilePicture.Length > 256 * 1024) {
+                    ModelState.AddModelError("ProfilePicture", "Profile picture size should not exceed 256KB.");
+                }
+
+                var allowedTypes = new[] { "image/jpeg", "image/png" };
+                if (!allowedTypes.Contains(model.ProfilePicture.ContentType)) {
+                    ModelState.AddModelError("ProfilePicture", "Only JPEG and PNG images are allowed.");
+                }
+
+                if (!ModelState.IsValid) {
+                    return View(model);
+                }
+
+                using var memoryStream = new MemoryStream();
+                await model.ProfilePicture.CopyToAsync(memoryStream);
+                user.ProfilePicture = memoryStream.ToArray();
+            }
 
             var result = await userManager.CreateAsync(user, model.Password);
 
