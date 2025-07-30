@@ -1,4 +1,5 @@
 ﻿using ClinicDM.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,5 +51,42 @@ namespace ClinicDM.Controllers {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateUser() {
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(UserCreateVM model) {
+
+            if (!ModelState.IsValid) {
+                return View(model);
+            }
+
+            var user = new IdentityUser {
+                UserName = model.Email,
+                Email = model.Email
+            };
+
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Create user failed!!");
+                return View(model);
+            }
+
+            result = await userManager.AddToRoleAsync(user, model.Role);
+            if (!result.Succeeded) {
+                ModelState.AddModelError(string.Empty, "failed to add role!!");
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(CreateUser));
+        }
+
     }
 }
